@@ -25,8 +25,4 @@
 	} else {
 		toJson("message", "No request POST");
 	}
-	
-	$user = new User();
-	$created = $user->create("", "", "", "", "", "", "", "", "","", "", "");
-	//echo "ok";
  ?>
