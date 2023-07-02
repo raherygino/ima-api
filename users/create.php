@@ -19,8 +19,16 @@
 		$token = "bc44xc44sf4f4c44v465";
 
 		$user = new User();
-		$created = $user->create($lastname, $firstname, $gender, $birthday, $birthplace, $id_card, $country, $city, $phone, $email, $password, $token);
-		toJson("message", "created");
+		if ($user->emailExist($email)) {
+			toJson("message", "mail_exist");
+		} else {
+			if ($user->phoneExist($phone)) {
+				toJson("message", "phone_exist");
+			} else {
+				$created = $user->create($lastname, $firstname, $gender, $birthday, $birthplace, $id_card, $country, $city, $phone, $email, $password, $token);
+				toJson("message", "created");
+			}
+		}
 			
 	} else {
 		toJson("message", "No request POST");
