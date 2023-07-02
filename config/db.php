@@ -17,11 +17,12 @@
         echo $e->getMessage();
       }
       return self::$database;
-    }/*
+    }
+
     public function mysqli_db() {
-      $database = mysqli_connect("127.0.0.1","root","","eluos_database");
+      $database = mysqli_connect("127.0.0.1","root","","ima_db");
       return $database;
-    }*/
+    }
 
   }
 
