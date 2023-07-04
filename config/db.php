@@ -10,7 +10,7 @@
 
     public static function _DB(){
       try {
-        self::$database = new PDO('mysql:host=127.0.0.1;dbname=ima_db;charset=utf8mb4', 'root', '');
+        self::$database = new PDO('mysql:host=127.0.0.1;dbname=eluosmg_ima;charset=utf8mb4', 'eluosmg_ima', 'Madagascar@2023');
         self::$database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $e = self::$e;
       } catch (PDOException $e) {
