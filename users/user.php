@@ -73,6 +73,12 @@
 			return $data;
    		}
 
+   		public function all() {
+   			$query = $this->db->prepare("SELECT * FROM users");
+   			$query->execute();
+			return $query;
+   		}
+
    		public function fetchDataByEmail($email, $password) {
    			$query = $this->db->prepare("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
    			$query->execute();

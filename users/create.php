@@ -3,6 +3,7 @@
 	include '../config/db.php';
 	include '../config/functions.php';
 	include 'user.php';
+	$user = new User();
 	if (isset($_POST['lastname'])) {
 
 		$lastname = $_POST['lastname'];
@@ -18,7 +19,6 @@
 		$password = $_POST['password'];
 		$token = "bc44xc44sf4f4c44v465";
 
-		$user = new User();
 		if ($user->emailExist($email)) {
 			toJson("message", "mail_exist");
 		} else {
