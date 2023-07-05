@@ -13,6 +13,7 @@ RewriteRule ^users/login users/login.php [QSA,NC,L]
 RewriteRule ^users/forgot users/forgot.php [QSA,NC,L]
 RewriteRule ^users/check_code users/check_code.php [QSA,NC,L]
 RewriteRule ^users/reset_password users/reset_password.php [QSA,NC,L]
+RewriteRule ^test config/check_db.php [QSA,NC,L]
 
 
 ErrorDocument 404 404.php

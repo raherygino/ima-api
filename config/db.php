@@ -2,7 +2,7 @@
 
   class Database{
 
-    public static $e;
+    public static $e = "connected";
     public static $database;
     private static $host = "127.0.0.1";
     private static $db = "ima_db"; //eluosmg_ima
@@ -16,14 +16,19 @@
         self::$database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $e = self::$e;
       } catch (PDOException $e) {
-        echo $e->getMessage();
+        $message = $e->getMessage();
+        $pos = strpos($message, "php_network_getaddresses");
+        if ($pos != "") {
+          echo $message;
+        } else {
+          self::$e = $message;
+        }
       }
       return self::$database;
     }
 
-    public function mysqli_db() {
-      $database = mysqli_connect("127.0.0.1","root","","ima_db");
-      return $database;
+    public function message() {
+      return self::$e;
     }
 
   }
