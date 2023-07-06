@@ -8,6 +8,8 @@
 	while($data = $query->fetch(PDO::FETCH_OBJ)) {
 		$all .= json_encode($data) .",";
 	}
-	$all .= "{}]";
-	echo $all;
+	$all .= "]";
+	// Set Content-type to JSON
+	header('Content-type: application/json');
+	echo str_replace(',]',']',$all);
 ?>
