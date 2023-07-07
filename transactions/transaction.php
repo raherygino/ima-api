@@ -8,8 +8,12 @@
       		$this->db = $db;
     	}
 
-    	public function create($num_sender, $num_receiver, $amount) {
-    		$query = $this->db->prepare("INSERT INTO transaction_user (id_transaction, num_sender, num_receiver, amount, status, created_at, updated_at) VALUES (NULL, '$num_sender', '$num_receiver', '$amount', 'pending', NOW(), NOW())");
+    	public function create($num_sender, $num_receiver, $amount, $type) {
+            $status = "pending";
+            if (strpos($type, "QR") == 0) {
+                $status == "sent";
+            }
+    		$query = $this->db->prepare("INSERT INTO transaction_user (id_transaction, num_sender, num_receiver, amount, status, type, created_at, updated_at) VALUES (NULL, '$num_sender', '$num_receiver', '$amount', '$status', '$type', NOW(), NOW())");
     		$query->execute();
     		return $query;
    		}

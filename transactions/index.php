@@ -22,7 +22,10 @@
         while($data = $query->fetch(PDO::FETCH_OBJ)) {
             $data->name_sender = $user->fetchByPhone($data->num_sender)->lastname;
             $data->name_receiver = $user->fetchByPhone($data->num_receiver)->lastname;
-            $data->method = "Network";
+            $data->method = $data->type;
+            if ($data->type == "QR Code") {
+                $data->status = "sent";
+            }
             $all .= json_encode($data) .",";
         }
 
