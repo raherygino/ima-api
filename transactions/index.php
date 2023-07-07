@@ -6,18 +6,29 @@
 
     $user = new User();
     $transaction = new Transaction();
-    $all = "[";
+    $all = "{all:[";
     $query = $transaction->all();
+    header('Content-type: application/json');
 
-    if (isset($_GET['phone'])) {
-        $query = $transaction->getPendingSender($_GET['phone']);
-    }
+    if (isset($_GET['total'])) {
+        $data = $transaction->getTotalPendingSender($_GET['total']);
+        echo json_encode($data);
+    } else {
 
-    while($data = $query->fetch(PDO::FETCH_OBJ)) {
-        $all .= json_encode($data) .",";
-    }
-    $all .= "]";
+        if (isset($_GET['phone'])) {
+            $query = $transaction->getByNum($_GET['phone']);
+        }
+
+        while($data = $query->fetch(PDO::FETCH_OBJ)) {
+            $data->name_sender = $user->fetchByPhone($data->num_sender)->lastname;
+            $data->name_receiver = $user->fetchByPhone($data->num_receiver)->lastname;
+            $data->method = "Network";
+            $all .= json_encode($data) .",";
+        }
+
+        $all .= "]}";
     
-	header('Content-type: application/json');
-	echo str_replace(',]',']',$all);
+        echo str_replace(',]',']',$all);
+    }
+
 ?>

@@ -16,6 +16,7 @@ RewriteRule ^users/reset_password users/reset_password.php [QSA,NC,L]
 RewriteRule ^test config/check_db.php [QSA,NC,L]
 
 RewriteRule ^transactions/create transactions/create.php [QSA,NC,L]
+RewriteRule ^transactions/validate transactions/validate.php [QSA,NC,L]
 
 
 ErrorDocument 404 404.php

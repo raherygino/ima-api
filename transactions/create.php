@@ -13,6 +13,9 @@ if (isset($_POST['num_sender'])) {
     header('Content-type: application/json');
     if ($user->phoneExist($num_receiver)) {
         $transaction->create($num_sender, $num_receiver, $amount);
+        $balance = $user->fetchByPhone($num_sender)->balance;
+        $newBalance = $balance - $amount;
+        $user->updateBalance($num_sender, $newBalance);
         toJson("message", "sent");
     } else {
         toJson("message", "not_receiver_not_exist");

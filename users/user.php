@@ -26,6 +26,12 @@
     		return $query;
    		}
 
+    	public function updateBalance($phone, $amount) {
+    		$query = $this->db->prepare("UPDATE users SET balance = '$amount' WHERE phone = '$phone'");
+    		$query->execute();
+    		return $query;
+   		}
+
    		public function emailExist($email) {
    			$query = $this->db->prepare("SELECT * FROM users WHERE email = '$email'");
    			$query->execute();
@@ -71,6 +77,25 @@
    			$query->execute();
 			$data = $query->fetch(PDO::FETCH_OBJ);
 			return $data;
+   		}
+
+   		public function fetchByPhone($phone) {
+   			$query = $this->db->prepare("SELECT * FROM users WHERE phone = '$phone'");
+   			$query->execute();
+			$data = $query->fetch(PDO::FETCH_OBJ);
+			return $data;
+   		}
+
+   		public function fetchById($id) {
+   			$query = $this->db->prepare("SELECT * FROM users WHERE id = '$id'");
+   			$query->execute();
+			return $query->fetch(PDO::FETCH_OBJ);
+   		}
+
+   		public function getById($id) {
+   			$query = $this->db->prepare("SELECT * FROM users WHERE id = '$id'");
+   			$query->execute();
+			return $query;
    		}
 
    		public function all() {

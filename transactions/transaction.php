@@ -14,10 +14,29 @@
     		return $query;
    		}
 
+    	public function updateStatus($id, $status) {
+    		$query = $this->db->prepare("UPDATE transaction_user SET status = '$status' WHERE id_transaction = '$id'");
+    		$query->execute();
+    		return $query;
+   		}
+
         public function getPendingSender($num_sender) {
-            $query = $this->db->prepare("SELECT * FROM transaction_user WHERE num_sender = '$num_sender' AND status = 'pending' ");
+            $query = $this->db->prepare("SELECT * FROM transaction_user WHERE (num_sender = '$num_sender' OR num_receiver = '$num_sender') AND status = 'pending' ");
             $query->execute();
             return $query;
+        }
+
+        public function getByNum($phone) {
+            $query = $this->db->prepare("SELECT * FROM transaction_user WHERE (num_sender = '$phone' OR num_receiver = '$phone') ORDER BY id_transaction DESC");
+            $query->execute();
+            return $query;
+        }
+
+        public function getTotalPendingSender($num_sender) {
+            $query = $this->db->prepare("SELECT num_sender, status, sum(amount) as total FROM transaction_user WHERE num_sender = '$num_sender' AND status = 'pending' ");
+            $query->execute();
+			$data = $query->fetch(PDO::FETCH_OBJ);
+			return $data;
         }
 
         public function all() {
