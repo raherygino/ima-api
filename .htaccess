@@ -9,6 +9,7 @@ RewriteRule ^([a-zA-Z0-9_]+)$ $1.php [QSA,NC,L]
 
 
 RewriteRule ^users/create users/create.php [QSA,NC,L]
+RewriteRule ^users/update users/update.php [QSA,NC,L]
 RewriteRule ^users/login users/login.php [QSA,NC,L]
 RewriteRule ^users/forgot users/forgot.php [QSA,NC,L]
 RewriteRule ^users/check_code users/check_code.php [QSA,NC,L]
